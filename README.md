@@ -39,7 +39,7 @@ A one‑click **Demo Mode** walks the full pipeline with synthetic data, so you 
    pip install -r requirements.txt   # currently empty
 
    # Start the API server (respects $PORT, defaults to 8000)
-   python -m TMS-Prototype.run_server
+   python -m TMS_Prototype.run_server
    ```
 
    The server will start and expose a health endpoint at `http://localhost:8000/healthz`.
@@ -70,7 +70,7 @@ A one‑click **Demo Mode** walks the full pipeline with synthetic data, so you 
 ## Project Structure (Key Folders)
 
 ```
-/TMS-Prototype          # Backend kernel, harnesses, API, tests
+/TMS_Prototype          # Backend kernel, harnesses, API, tests
 /pages                  # Next.js pages (landing, demo, harness engineering, etc.)
 /src/components         # Reusable UI pieces (demo button, explainability modal, event bus)
 /src/utils              # Event bus implementation
@@ -79,10 +79,10 @@ A one‑click **Demo Mode** walks the full pipeline with synthetic data, so you 
 
 ## Verification & Testing
 
-- Backend unit tests live under `TMS-Prototype/tests/`. Run them with:
+- Backend unit tests live under `TMS_Prototype/tests/`. Run them with:
 
   ```bash
-  cd TMS-Prototype
+  cd TMS_Prototype
   pytest -q
   ```
 
@@ -110,7 +110,7 @@ You can deploy to any container‑friendly platform (Railway, Render, Docker Swa
 
 ## License
 
-MIT – see the `LICENSE` file in `TMS-Prototype/`.
+MIT – see the `LICENSE` file in `TMS_Prototype/`.
 
 ---
 
