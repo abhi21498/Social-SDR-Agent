@@ -1,0 +1,10 @@
+flowchart LR
+    F[Failure] --> D[Detection]
+    D --> C[Classification]
+    C --> RC[Root Cause Analysis]
+    RC --> HA[Hidden Assumptions]
+    HA --> K[Knowledge Update]
+    K --> I[Improvement]
+    I --> F
+    style K fill:#f3e5f5,stroke:#6a1b9a
+    style F:#ffebee,stroke:#c62828

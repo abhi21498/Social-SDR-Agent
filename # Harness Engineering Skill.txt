@@ -1,0 +1,343 @@
+# Harness Engineering Skill
+
+## Purpose
+
+Use Harness Engineering to guide every engineering task from problem definition to implementation while preserving engineering intent, producing reusable knowledge, and continuously validating decisions through evidence.
+
+This skill is used whenever creating:
+
+- Problem Statements
+- System Designs
+- Architecture Documents
+- Engineering Harnesses
+- Implementation Plans
+- Verification Plans
+- Deployment Plans
+- Post-implementation Learning
+
+---
+
+# Core Philosophy
+
+Engineering does not exist to produce code.
+
+Engineering exists to transform intent into validated reality while continuously improving organizational knowledge.
+
+Always optimize for:
+
+- Intent Preservation
+- Evidence-backed Decisions
+- Protected Invariants
+- Knowledge Reuse
+- Continuous Learning
+
+---
+
+# Universal Thinking Model
+
+Before every engineering decision answer:
+
+## 1. What assumptions are being made?
+
+Document every explicit and hidden assumption.
+
+Examples:
+
+- User assumptions
+- Technical assumptions
+- Business assumptions
+- Infrastructure assumptions
+
+---
+
+## 2. What evidence supports those assumptions?
+
+Evidence may include:
+
+- Documentation
+- Benchmarks
+- Research
+- Existing implementation
+- Production behavior
+- User feedback
+- Experiments
+
+Never treat confidence as evidence.
+
+---
+
+## 3. What must never change?
+
+Identify system invariants.
+
+Examples:
+
+- Customer trust
+- Correctness
+- Security
+- Data integrity
+- Architectural intent
+- Traceability
+
+Every implementation must preserve these.
+
+---
+
+# Universal Harness Loop
+
+Every engineering activity follows:
+
+Intent
+
+↓
+
+Understand Context
+
+↓
+
+Identify Assumptions
+
+↓
+
+Collect Evidence
+
+↓
+
+Reason
+
+↓
+
+Design
+
+↓
+
+Implement
+
+↓
+
+Verify
+
+↓
+
+Observe
+
+↓
+
+Capture Knowledge
+
+↓
+
+Improve Future Engineering
+
+Never skip verification or knowledge capture.
+
+---
+
+# Knowledge Classification
+
+Continuously classify information into:
+
+KK (Known Knowns)
+
+Validated knowledge.
+
+KU (Known Unknowns)
+
+Questions requiring investigation.
+
+UK (Unknown Knowns)
+
+Knowledge that already exists but has not been reused.
+
+UU (Unknown Unknowns)
+
+New discoveries requiring adaptation.
+
+Every task should reduce uncertainty.
+
+---
+
+# Harness Deliverables
+
+Every harness must define:
+
+Purpose
+
+Inputs
+
+Outputs
+
+Assumptions
+
+Evidence
+
+Workflow
+
+Verification
+
+Quality Gates
+
+Failure Modes
+
+Knowledge Produced
+
+Protected Invariants
+
+KK / KU / UK / UU Assessment
+
+---
+
+# Quality Gates
+
+Before marking work complete verify:
+
+✓ Intent preserved
+
+✓ Architecture matches requirements
+
+✓ Assumptions documented
+
+✓ Evidence collected
+
+✓ Trade-offs explained
+
+✓ Unknowns identified
+
+✓ Verification completed
+
+✓ Traceability maintained
+
+✓ Knowledge extracted
+
+✓ Future improvements recorded
+
+---
+
+# Architecture Rules
+
+Always:
+
+Separate concerns.
+
+Use modular components.
+
+Keep dependencies one-directional.
+
+Protect invariants.
+
+Avoid technology-specific assumptions.
+
+Capabilities should outlive implementations.
+
+---
+
+# Engineering Harness Creation
+
+When creating an Engineering Harness:
+
+1. Read Problem Statement
+
+2. Read System Design
+
+3. Understand Existing Implementation
+
+4. Compare Design vs Implementation
+
+5. Identify Gaps
+
+6. Plan Incremental Implementation
+
+7. Verify Every Increment
+
+8. Record Decisions
+
+9. Update Knowledge
+
+Never implement before understanding.
+
+---
+
+# Implementation Rules
+
+Implementation must:
+
+Follow architecture.
+
+Preserve traceability.
+
+Be observable.
+
+Be testable.
+
+Avoid unnecessary abstraction.
+
+Produce reusable outputs.
+
+Every implementation step must map back to the system design.
+
+---
+
+# Verification
+
+Every feature requires:
+
+Functional verification
+
+Architecture verification
+
+Traceability verification
+
+Business validation
+
+Failure analysis
+
+Knowledge capture
+
+Verification is mandatory before proceeding.
+
+---
+
+# Learning
+
+Every completed task must produce:
+
+Lessons learned
+
+Design improvements
+
+Reusable patterns
+
+Anti-patterns
+
+Architecture insights
+
+Future recommendations
+
+Engineering knowledge compounds.
+Code does not.
+
+---
+
+# Output Expectations
+
+When using this skill always produce:
+
+1. Intent Summary
+
+2. Assumptions
+
+3. Evidence
+
+4. Invariants
+
+5. Architecture Reasoning
+
+6. Implementation Plan
+
+7. Verification Plan
+
+8. Risks
+
+9. Knowledge Captured
+
+10. Next Engineering Loop

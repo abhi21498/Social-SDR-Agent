@@ -1,0 +1,25 @@
+flowchart LR
+    subgraph KK[Known Knowns]
+        direction TB
+        KK1[Facts, validated knowledge]
+    end
+    subgraph KU[Known Unknowns]
+        direction TB
+        KU1[Identified gaps, questions]
+    end
+    subgraph UK[Unknown Knowns]
+        direction TB
+        UK1[Latent knowledge, tribal knowledge]
+    end
+    subgraph UU[Unknown Unknowns]
+        direction TB
+        UU1[Unanticipated surprises]
+    end
+    %% Movement arrows
+    UK -->|Discovery| KK
+    UU -->|Investigation| KU
+    KU -->|Research| KK
+    style KK fill:#e3f2fd,stroke:#1565c0
+    style KU:#fff3e0,stroke:#ef6c00
+    style UK:#f3e5f5,stroke:#6a1b9a
+    style UU:#ffebee,stroke:#c62828

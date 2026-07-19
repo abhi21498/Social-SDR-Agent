@@ -1,0 +1,10 @@
+flowchart LR
+    F[Failure Detected] --> R[Record in Failure DB]
+    R --> A[Analyze for Patterns]
+    A --> T[Create Test Case to Prevent Recurrence]
+    T -->|Added to| TS[Test Suite]
+    TS -->|Run on| CI[CI/CD Pipeline]
+    CI -->|Pass| OK[No Regression]
+    CI -->|Fail| F
+    style T fill:#fff3e0,stroke:#ef6c00
+    style TS:#e8f5e9,stroke:#2e7d32

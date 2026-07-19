@@ -1,0 +1,17 @@
+flowchart LR
+    %% Actors
+    Human[Human Engineer] -->|Intent, Requirements| EOS[Engineering Operating System]
+    AI[AI Agent] -->|Code Generation, Assistance| EOS
+    %% EOS boundary
+    subgraph EOS
+        EK[Engineering Kernel]
+        EK -->|Intent, Evidence, Assumptions| HLD[High-Level Design]
+        EK -->|Reasoning Process| ERA[Engineering Reasoning Architecture]
+        EK -->|Low-Level Details| LLD[Low-Level Design]
+    end
+    HLD -->|Component Specs| API[API Layer]
+    HLD -->|Component Specs| Service[Service Layer]
+    HLD -->|Component Specs| Storage[Storage Layer]
+    HLD -->|Component Specs| Knowledge[Knowledge Store]
+    API -->|Requests| External[External Systems / Users]
+    Style EOS fill:#f9f,stroke:#333,stroke-width:2px

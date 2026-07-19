@@ -1,0 +1,15 @@
+flowchart TD
+    subgraph H[API Harness]
+        R[Receive Request] --> I[Interact with Kernel]
+        I -->|Get Intent/Assumptions| Proc[Process Request]
+        Proc -->|Need Data| S[Storage Harness]
+        S -->|Returns Data| Proc
+        Proc -->|Log Decision| K[Knowledge Harness]
+        K -->|Ack| Proc
+        Proc --> SResp[Send Response]
+    end
+    subgraph KH[Kernel Hooks]
+        I
+    end
+    style H fill:#e3f2fd,stroke:#1565c0
+    style KH:#f9f,stroke:#333,stroke-width:2px

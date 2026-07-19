@@ -1,0 +1,10 @@
+flowchart LR
+    subgraph EK[Engineering Kernel]
+        IM[Intent Manager] --> AC[Assumption Collector]
+        AC --> EE[Evidence Evaluator]
+        EE --> RE[Reasoning Engine]
+        RE --> DM[Decision Maker]
+        DM --> KU[Knowledge Updater]
+        KU -->|Updated Knowledge| EE
+    end
+    style EK fill:#f9f,stroke:#333,stroke-width:2px

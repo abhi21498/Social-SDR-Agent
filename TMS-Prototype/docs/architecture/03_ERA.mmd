@@ -1,0 +1,15 @@
+flowchart LR
+    I[Intent] --> UC[Understand Context]
+    UA[Understand Context] --> IA[Identify Assumptions]
+    IA --> CE[Collect Evidence]
+    CE --> R[Reason]
+    R --> D[Design]
+    D --> IMPL[Implement]
+    IMPL --> V[Verify]
+    V --> O[Observe]
+    O --> CK[Capture Knowledge]
+    CK --> IFH[Improve Future Harnesses]
+    IFH --> I
+    style I fill:#ffebee,stroke:#c62828
+    style CK:#fff3e0,stroke:#ef6c00
+    style IFH:#e8f5e9,stroke:#2e7d32

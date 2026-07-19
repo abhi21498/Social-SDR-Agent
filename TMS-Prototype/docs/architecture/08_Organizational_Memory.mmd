@@ -1,0 +1,9 @@
+flowchart LR
+    subgraph KM[Knowledge Store]
+        ADR[Architecture Decisions] -->|Stored| KM
+        Metrics[Metrics & Logs] -->|Stored| KM
+        Lessons[Lessons Learned] -->|Stored| KM
+        Patterns[Reusable Patterns] -->|Stored| KM
+    end
+    KM -->|Informs| Future[Future Projects]
+    style KM fill:#f3e5f5,stroke:#6a1b9a

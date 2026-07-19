@@ -1,0 +1,20 @@
+flowchart TD
+    %% External Actors
+    Human[Human Engineer] -->|Defines Intent, Provides Feedback| API
+    AI[AI Agent] -->|Generates Code, Provides Suggestions| API
+    ExtUser[External Users / Systems] -->|API Requests| API
+    API -->|API Responses| ExtUser
+
+    %% Core Layers
+    subgraph Core
+        API[API Layer] -->|Requests| Service[Service Layer]
+        Service -->|Business Logic| Storage[Storage Layer]
+        Storage -->|Read/Write Data| Knowledge[Knowledge Store]
+        Knowledge -->|Insights, Learned Patterns| Service
+    end
+
+    %% Data Flows (optional)
+    style API fill:#e3f2fd,stroke:#1565c0
+    style Service fill:#e8f5e9,stroke:#2e7d32
+    style Storage fill:#fff3e0,stroke:#ef6c00
+    style Knowledge fill:#f3e5f5,stroke:#6a1b9a
