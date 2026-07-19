@@ -1,1 +1,1 @@
-web: python -m TMS-Prototype.run_server
+web: python -m TMS_Prototype.run_server

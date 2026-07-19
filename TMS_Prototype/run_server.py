@@ -6,7 +6,7 @@ This is for demonstration purposes only.
 import json
 import os
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from harness.api.handler import handle_request
+from TMS_Prototype.src.harness.api.handler import handle_request
 
 class RequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):

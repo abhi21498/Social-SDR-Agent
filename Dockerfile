@@ -18,4 +18,4 @@ EXPOSE 8000
 ENV PORT=8000
 
 # Run the application
-CMD ["python", "-m", "TMS-Prototype.run_server"]
+CMD ["python", "-m", "TMS_Prototype.run_server"]
