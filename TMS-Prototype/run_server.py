@@ -4,6 +4,7 @@ A simple HTTP server that uses the TMS API handler.
 This is for demonstration purposes only.
 """
 import json
+import os
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from harness.api.handler import handle_request
 
@@ -34,7 +35,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             self.wfile.write(body.encode('utf-8'))
 
 if __name__ == '__main__':
-    port = 8000
+    port = int(os.environ.get('PORT', '8000'))
     server_address = ('', port)
     httpd = HTTPServer(server_address, RequestHandler)
     print(f'Starting TMS API server on http://localhost:{port}')

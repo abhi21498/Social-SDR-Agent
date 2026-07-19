@@ -3,6 +3,7 @@ import os
 from ..storage.memory import get_tasks, create_task
 from ..knowledge.log import log_decision
 
+
 def handle_get_tasks():
     """Handle GET /tasks request.
     Returns a tuple (status, headers, body) where:
@@ -14,6 +15,7 @@ def handle_get_tasks():
     body = json.dumps(tasks)
     headers = [("Content-Type", "application/json")]
     return 200, headers, body
+
 
 def handle_post_task(request_body):
     """Handle POST /tasks request.
@@ -32,7 +34,7 @@ def handle_post_task(request_body):
                 decision="Create task",
                 evidence={"request_body": request_body, "error": error_msg},
                 outcome="Failure: Invalid request body",
-                log_file="knowledge.log"
+                log_file="knowledge.log",
             )
         except Exception:
             pass  # Logging failure should not break the request
@@ -45,7 +47,7 @@ def handle_post_task(request_body):
                 decision="Create task",
                 evidence={"request_body": request_body, "error": error_msg},
                 outcome="Failure: Invalid title",
-                log_file="knowledge.log"
+                log_file="knowledge.log",
             )
         except Exception:
             pass
@@ -58,13 +60,21 @@ def handle_post_task(request_body):
             decision="Create task",
             evidence={"request_body": request_body},
             outcome="Success",
-            log_file="knowledge.log"
+            log_file="knowledge.log",
         )
     except Exception:
         pass
     body = json.dumps(task)
     headers = [("Content-Type", "application/json")]
     return 201, headers, body
+
+
+def handle_health():
+    """Handle GET /healthz request."""
+    body = json.dumps({"status": "ok"})
+    headers = [("Content-Type", "application/json")]
+    return 200, headers, body
+
 
 def handle_request(method, path, body=None, headers=None):
     """Dispatch the request to the appropriate handler.
@@ -76,7 +86,7 @@ def handle_request(method, path, body=None, headers=None):
     Returns:
         tuple: (status, headers, body) for the response.
     """
-    # Normalize the path
+    # Normalize the path (remove trailing slash)
     path = path.rstrip("/")
     if method == "GET" and path == "/tasks":
         return handle_get_tasks()
@@ -87,5 +97,7 @@ def handle_request(method, path, body=None, headers=None):
         except json.JSONDecodeError:
             return 400, [("Content-Type", "application/json")], json.dumps({"error": "Invalid JSON"})
         return handle_post_task(request_body)
+    elif method == "GET" and path == "/healthz":
+        return handle_health()
     else:
         return 404, [("Content-Type", "application/json")], json.dumps({"error": "Not Found"})
