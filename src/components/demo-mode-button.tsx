@@ -153,28 +153,43 @@ export const DemoModeButton: React.FC = () => {
       </p>
       <div className="space-y-2">
         {DEMO_STEPS.map((s,i)=>(
-          <div key={i} className={`flex items-center gap-3 p-3 rounded-lg ${()=>{
+          <div key={i} className={`flex flex-col gap-2 p-3 rounded-lg ${()=>{
             if(status[i]==='running') return 'bg-blue-50 dark:bg-blue-900/20 border-l-4 border-blue-500';
             if(status[i]==='success') return 'bg-green-50 dark:bg-green-900/20 border-l-4 border-green-500';
             if(status[i]==='error') return 'bg-red-50 dark:bg-red-900/20 border-l-4 border-red-500';
             return 'bg-gray-50 dark:bg-gray-800/20';
           }}`}>
-            {s.icon && <div className="flex-shrink-0">{s.icon}</div>}
-            <div className="flex-1">
-              <div className="font-medium">{s.label}</div>
-              {status[i]==='running' && <span className="ml-2 text-xs text-blue-600 animate-pulse">Running…</span>}
-              {status[i]==='success' && <span className="ml-2 text-xs text-green-600">✔️</span>}
-              {status[i]==='error' && <span className="ml-2 text-xs text-red-600">❌</span>}
+            <div className="flex items-center gap-3">
+              {s.icon && <div className="flex-shrink-0">{s.icon}</div>}
+              <div className="flex-1">
+                <div className="font-medium">{s.label}</div>
+                {status[i]==='running' && <span className="ml-2 text-xs text-blue-600 animate-pulse">Running…</span>}
+                {status[i]==='success' && <span className="ml-2 text-xs text-green-600">✔️ Completed</span>}
+                {status[i]==='error' && <span className="ml-2 text-xs text-red-600">❌ Failed</span>}
+              </div>
+              <div className="w-full h-1 mt-1 bg-gray-200 dark:bg-gray-700 rounded overflow-hidden">
+                <div className={`
+                  h-full transition-all duration-500
+                  ${status[i]==='pending'?'w-0':''}
+                  ${status[i]==='running'?'w-1/3':''}
+                  ${status[i]==='success'?'w-full':''}
+                  ${status[i]==='error'?'w-full bg-red-500':''}
+                `}></div>
+              </div>
             </div>
-            <div className="w-full h-1 mt-1 bg-gray-200 dark:bg-gray-700 rounded overflow-hidden">
-              <div className={`
-                h-full transition-all duration-500
-                ${status[i]==='pending'?'w-0':''}
-                ${status[i]==='running'?'w-1/3':''}
-                ${status[i]==='success'?'w-full':''}
-                ${status[i]==='error'?'w-full bg-red-500':''}
-              `}></div>
-            </div>
+            {(status[i] === 'success' || status[i] === 'running') && s.payload && (
+              <details className="group ml-10 w-full">
+                <summary className="cursor-pointer text-xs text-muted-foreground flex items-center gap-1 hover:text-foreground">
+                  <span>Show payload</span>
+                  <svg className="w-3 h-3 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </summary>
+                <pre className="mt-2 p-3 bg-gray-100 dark:bg-gray-800 rounded text-xs overflow-x-auto text-gray-700 dark:text-gray-300 font-mono whitespace-pre-wrap">
+                  {JSON.stringify(s.payload(), null, 2)}
+                </pre>
+              </details>
+            )}
           </div>
         ))}
       </div>
