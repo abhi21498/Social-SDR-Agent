@@ -10,7 +10,7 @@ const DEMO_STEPS = [
       id: Date.now(),
       source: 'linkedin',
       title: `LinkedIn post: Demo Series B funding`,
-      url: 'https://linkedin.com/posts/demo`,
+      url: 'https://linkedin.com/posts/demo',
       timestamp: new Date().toISOString(),
       content: 'Demo LinkedIn post showing a company milestone – perfect for ICP match: Technology, 200‑500 employees, recent funding.',
       relevanceScore: 0.85,
@@ -109,9 +109,10 @@ export const DemoModeButton: React.FC = () => {
         return copy;
       });
 
-      if (DEMO_STEPS[i].emit && DEMO_STEPS[i].payload) {
+      const emitType = DEMO_STEPS[i].emit;
+      if (emitType) {
         try {
-          eventBus.emit(DEMO_STEPS[i].emit, DEMO_STEPS[i].payload());
+          eventBus.publish(emitType, DEMO_STEPS[i].payload());
         } catch (e) {
           console.error(`Demo step ${DEMO_STEPS[i].label} failed`, e);
           setStatus(prev => {
@@ -132,7 +133,7 @@ export const DemoModeButton: React.FC = () => {
 
     // Demo finished – redirect to dashboard after a brief pause
     await new Promise(res => setTimeout(res, 800));
-    window.location.href = '/dashboard';
+    window.location.href = '/';
     setRunning(false);
   };
 

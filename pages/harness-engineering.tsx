@@ -16,7 +16,7 @@ const HarnessEngineeringPage: NextPage = () => {
       <main className="min-h-screen bg-gray-50 dark:bg-gray-900 p-8">
         <h1 className="text-3xl font-bold mb-6">Harness Engineering Details</h1>
         <p className="text-muted-foreground mb-6">
-          Each harness is an independent, testable module with a well‑defined event contract.
+          Each harness is an independent, testable module with a well-defined event contract.
         </p>
 
         <Tabs defaultValue="signal" className="w-full">
@@ -43,20 +43,19 @@ const HarnessEngineeringPage: NextPage = () => {
                 </p>
                 <Separator />
                 <p className="text-sm"><strong>Inputs:</strong> Public feeds (RSS/Twitter/LinkedIn/NewsAPI/Webhooks), configuration (keywords, sources, rate limits).</p>
-                <p className="text-sm"><strong>Outputs:</strong> Event `signal_detected` with schema: {id, source, title, url, timestamp, content, relevanceScore, sentiment, tags[]}.</p>
+                <p className="text-sm"><strong>Outputs:</strong> Event `signal_detected` with schema: &#123;id, source, title, url, timestamp, content, relevanceScore, sentiment, tags[]&#125;.</p>
                 <p className="text-sm"><strong>Responsibilities:</strong></p>
                 <ul className="list-disc list-inset space-y-1 text-xs pl-4">
                   <li>Fetch & deduplicate signals.</li>
                   <li>Relevance scoring against ICP heuristics.</li>
                   <li>Sentiment & language detection.</li>
                   <li>Publish to event bus.</li>
-                </p>
-                <p className="text-sm"><strong>Dependencies:</strong> None (only emits).</p>
-                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit‑tested.</p>
+                </ul>\n                <p className="text-sm"><strong>Dependencies:</strong> None (only emits).</p>
+                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit-tested.</p>
                 <p className="text-sm"><strong>Verification:</strong> Unit test suite validates parsing, scoring, dedup, event shape.</p>
                 <p className="text-sm"><strong>Knowledge Produced:</strong> Signal source reliability, temporal patterns, keyword efficacy.</p>
-                <p className="text-sm"><strong>Failure Modes:</strong> Network timeout, malformed feed, rate‑limit → circuit breaker + dead‑letter queue.</p>
-                <p className="text-sm"><strong>Protected Invariants:</strong> No signal dropped without being scored; enrichment never mutates original signal; all timestamps ISO‑8601 UTC.</p>
+                <p className="text-sm"><strong>Failure Modes:</strong> Network timeout, malformed feed, rate-limit → circuit breaker + dead-letter queue.</p>
+                <p className="text-sm"><strong>Protected Invariants:</strong> No signal dropped without being scored; enrichment never mutates original signal; all timestamps ISO-8601 UTC.</p>
                 <Button variant="outline" size="sm" onClick={() => alert('Showing raw signal detector logs…')}>
                   View Logs
                 </Button>
@@ -79,20 +78,19 @@ const HarnessEngineeringPage: NextPage = () => {
                 </p>
                 <Separator />
                 <p className="text-sm"><strong>Inputs:</strong> Event `signal_detected`; ICP definition (firmographics, technographics, behavior).</p>
-                <p className="text-sm"><strong>Outputs:</strong> Event `prospect_scored` with schema: {prospectId, score (0‑100), stage, timestamp}.</p>
+                <p className="text-sm"><strong>Outputs:</strong> Event `prospect_scored` with schema: &#123;prospectId, score (0-100), stage, timestamp&#125;.</p>
                 <p className="text-sm"><strong>Responsibilities:</strong></p>
                 <ul className="list-disc list-inset space-y-1 text-xs pl-4">
                   <li>Match signal to existing prospect or create new.</li>
-                  <li>Apply weighted scoring model (firmographic 40 %, technographic 30 %, behavioral 30 %).</li>
+                  <li>Apply weighted scoring model (firmographic 40 %, technographic 30 %, behavioral 30 %).</li>
                   <li>Update prospect attributes (lastSeen, source, tags).</li>
                   <li>Publish score event.</li>
-                </p>
-                <p className="text-sm"><strong>Dependencies:</strong> Consumes `signal_detected`; emits `prospect_scored`.</p>
-                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit‑tested.</p>
-                <p className="text-sm"><strong>Verification:</strong> Property‑based test for score bounds; integration test with mock signal bus.</p>
-                <p className="text-sm"><strong>Knowledge Produced:</strong> ICP weight effectiveness, source‑to‑conversion ratios.</p>
-                <p className="text-sm"><strong>Failure Modes:</strong> Missing prospect storage → fallback to in‑mem store with warning.</p>
-                <p className="text-sm"><strong>Protected Invariants:</strong> Score always 0‑100; stage progression monotonic; prospect ID immutable after creation.</p>
+                </ul>\n                <p className="text-sm"><strong>Dependencies:</strong> Consumes `signal_detected`; emits `prospect_scored`.</p>
+                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit-tested.</p>
+                <p className="text-sm"><strong>Verification:</strong> Property-based test for score bounds; integration test with mock signal bus.</p>
+                <p className="text-sm"><strong>Knowledge Produced:</strong> ICP weight effectiveness, source-to-conversion ratios.</p>
+                <p className="text-sm"><strong>Failure Modes:</strong> Missing prospect storage → fallback to in-mem store with warning.</p>
+                <p className="text-sm"><strong>Protected Invariants:</strong> Score always 0-100; stage progression monotonic; prospect ID immutable after creation.</p>
                 <Button variant="outline" size="sm" onClick={() => alert('Showing prospect store snapshot…')}>
                   Peek Store
                 </Button>
@@ -115,18 +113,17 @@ const HarnessEngineeringPage: NextPage = () => {
                 </p>
                 <Separator />
                 <p className="text-sm"><strong>Inputs:</strong> Event `prospect_scored` (score ≥ threshold).</p>
-                <p className="text-sm"><strong>Outputs:</strong> Event `research_completed` with schema: {researchId, prospectId, data: {technographics:string, recentNews:string, newsSentiment:string}}.</p>
+                <p className="text-sm"><strong>Outputs:</strong> Event `research_completed` with schema: &#123;researchId, prospectId, data: &#123;technographics:string, recentNews:string, newsSentiment:string&#125;&#125;.</p>
                 <p className="text-sm"><strong>Responsibilities:</strong></p>
                 <ul className="list-disc list-inset space-y-1 text-xs pl-4">
                   <li>Call enrichment APIs (Crunchbase, LinkedIn, BuiltWith, etc.) or use cached data.</li>
                   <li>Summarize findings into structured fields.</li>
                   <li>Publish enriched data event.</li>
-                </p>
-                <p className="text-sm"><strong>Dependencies:</strong> Consumes `prospect_scored`; emits `research_completed`.</p>
-                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit‑tested.</p>
+                </ul>\n                <p className="text-sm"><strong>Dependencies:</strong> Consumes `prospect_scored`; emits `research_completed`.</p>
+                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit-tested.</p>
                 <p className="text-sm"><strong>Verification:</strong> Mocked enrichment service; validates output schema and fallback behavior.</p>
                 <p className="text-sm"><strong>Knowledge Produced:</strong> Enrichment source reliability, data freshness thresholds.</p>
-                <p className="text-sm"><strong>Failure Modes:</strong> API rate‑limit → exponential backoff + stale‑data allowed flag.</p>
+                <p className="text-sm"><strong>Failure Modes:</strong> API rate-limit → exponential backoff + stale-data allowed flag.</p>
                 <p className="text-sm"><strong>Protected Invariants:</strong> Enrichment never reduces prospect score; timestamp always newer than prospect.lastSeen.</p>
                 <Button variant="outline" size="sm" onClick={() => alert('Showing latest enrichment call…')}>
                   Last Call
@@ -150,7 +147,7 @@ const HarnessEngineeringPage: NextPage = () => {
                 </p>
                 <Separator />
                 <p className="text-sm"><strong>Inputs:</strong> Event `research_completed`.</p>
-                <p className="text-sm"><strong>Outputs:</strong> Event `outreach_generated` with schema: {draftId, prospectId, subject:string, body:string, channel:'EMAIL'|'LINKEDIN_MESSAGE', variant:string}.</p>
+                <p className="text-sm"><strong>Outputs:</strong> Event `outreach_generated` with schema: &#123;draftId, prospectId, subject:string, body:string, channel:'EMAIL'|'LINKEDIN_MESSAGE', variant:string&#125;.</p>
                 <p className="text-sm"><strong>Responsibilities:</strong></p>
                 <ul className="list-disc list-inset space-y-1 text-xs pl-4">
                   <li>Select template based on industry, persona, score.</li>
@@ -158,13 +155,12 @@ const HarnessEngineeringPage: NextPage = () => {
                   <li>Apply tone & length constraints.</li>
                   <li>Log generation for explainability.</li>
                   <li>Publish draft event.</li>
-                </p>
-                <p className="text-sm"><strong>Dependencies:</strong> Consumes `research_completed`; emits `outreach_generated`.</p>
-                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit‑tested.</p>
+                </ul>\n                <p className="text-sm"><strong>Dependencies:</strong> Consumes `research_completed`; emits `outreach_generated`.</p>
+                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit-tested.</p>
                 <p className="text-sm"><strong>Verification:</strong> Unit test checks personalization fidelity, token limits, variant branching.</p>
                 <p className="text-sm"><strong>Knowledge Produced:</strong> Template performance metrics (open/response rates by segment).</p>
                 <p className="text-sm"><strong>Failure Modes:</strong> Template rendering error → fallback to generic template + alert.</p>
-                <p className="text-sm"><strong>Protected Invariants:</strong> No PII in output without consent; subject length < 78 chars; body contains unsubscribe link for email.</p>
+                <p className="text-sm"><strong>Protected Invariants:</strong> No PII in output without consent; subject length &lt; 78 chars; body contains unsubscribe link for email.</p>
                 <Button variant="outline" size="sm" onClick={() => alert('Showing generated draft preview…')}>
                   Preview Draft
                 </Button>
@@ -190,16 +186,15 @@ const HarnessEngineeringPage: NextPage = () => {
                 <p className="text-sm"><strong>Outputs:</strong> Either `outreach_approved` (with optional comment) or `outreach_rejected` (with reason).</p>
                 <p className="text-sm"><strong>Responsibilities:</strong></p>
                 <ul className="list-disc list-inset space-y-1 text-xs pl-4">
-                  <li>Persist draft to review queue (in‑memory or durable).</li>
+                  <li>Persist draft to review queue (in-memory or durable).</li>
                   <li>Notify reviewer via UI/email.</li>
                   <li>On approval → emit `outreach_approved`; on rejection → emit `outreach_rejected` with feedback.</li>
                   <li>Retain rejected drafts for learning.</li>
-                </p>
-                <p className="text-sm"><strong>Dependencies:</strong> Consumes `outreach_generated`; emits `outreach_approved` or `outreach_rejected`.</p>
-                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit‑tested.</p>
+                </ul>\n                <p className="text-sm"><strong>Dependencies:</strong> Consumes `outreach_generated`; emits `outreach_approved` or `outreach_rejected`.</p>
+                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit-tested.</p>
                 <p className="text-sm"><strong>Verification:</strong> Integration test simulates reviewer action; validates state transition and event emission.</p>
                 <p className="text-sm"><strong>Knowledge Produced:</strong> Reviewer comment patterns, common rejection reasons, approval latency.</p>
-                <p className="text-sm"><strong>Failure Modes:</strong> Queue overflow → back‑pressure signal to upstream harness.</p>
+                <p className="text-sm"><strong>Failure Modes:</strong> Queue overflow → back-pressure signal to upstream harness.</p>
                 <p className="text-sm"><strong>Protected Invariants:</strong> No outreach proceeds without an explicit approval event; all actions audited.</p>
                 <Button variant="outline" size="sm" onClick={() => alert('Showing pending review queue…')}>
                   View Queue
@@ -226,15 +221,15 @@ const HarnessEngineeringPage: NextPage = () => {
                 <p className="text-sm"><strong>Outputs:</strong> Events `conversation_started` (when first inbound arrives) and `conversation_reply` (each subsequent inbound).</p>
                 <p className="text-sm"><strong>Responsibilities:</strong></p>
                 <ul className="list-disc list-inset space-y-1 text-xs pl-4">
-                  <li>Log outbound message when `outreach_approved` received.</p>
-                  <li>Listen for inbound messages via channel adapters (SMTP IMAP, LinkedIn API).</p>
-                  <li>On first inbound → emit `conversation_started` with full thread.</p>
-                  <li>On subsequent inbound → emit `conversation_reply` with the new message.</p>
-                  <li>Compute sentiment (simple lexicon) and intent (meeting request, question, objection).</p>
-                  <li>Forward outcome to Feedback & Learning harness.</p>
-                </p>
+                  <li>Log outbound message when `outreach_approved` received.</li>
+                  <li>Listen for inbound messages via channel adapters (SMTP IMAP, LinkedIn API).</li>
+                  <li>On first inbound → emit `conversation_started` with full thread.</li>
+                  <li>On subsequent inbound → emit `conversation_reply` with the new message.</li>
+                  <li>Compute sentiment (simple lexicon) and intent (meeting request, question, objection).</li>
+                  <li>Forward outcome to Feedback & Learning harness.</li>
+                </ul>
                 <p className="text-sm"><strong>Dependencies:</strong> Consumes `outreach_approved`; emits `conversation_started` & `conversation_reply`.</p>
-                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit‑tested.</p>
+                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit-tested.</p>
                 <p className="text-sm"><strong>Verification:</strong> Mock channel adapters; validates event emission and sentiment accuracy.</p>
                 <p className="text-sm"><strong>Knowledge Produced:</strong> Response latency, sentiment trends, intent classification accuracy.</p>
                 <p className="text-sm"><strong>Failure Modes:</strong> Channel credential error → fallback to simulated inbound for demo.</p>
@@ -264,17 +259,17 @@ const HarnessEngineeringPage: NextPage = () => {
                 <p className="text-sm"><strong>Outputs:</strong> `knowledge_updated` event (if new insight), plus optional `model_retrain_trigger`.</p>
                 <p className="text-sm"><strong>Responsibilities:</strong></p>
                 <ul className="list-disc list-inset space-y-1 text-xs pl-4">
-                  <li>Determine outcome: meeting booked (explicit intent), positive response, neutral, negative, or timeout.</p>
-                  <li>Append outcome to `evidence.log` and, if informative, to `knowledge.log`.</p>
-                  <li>Compute simple metrics (reply rate, meeting rate) for internal dashboards.</p>
-                  <li>If confidence threshold crossed, emit `model_retrain_trigger` (future hook).</p>
-                </p>
+                  <li>Determine outcome: meeting booked (explicit intent), positive response, neutral, negative, or timeout.</li>
+                  <li>Append outcome to `evidence.log` and, if informative, to `knowledge.log`.</li>
+                  <li>Compute simple metrics (reply rate, meeting rate) for internal dashboards.</li>
+                  <li>If confidence threshold crossed, emit `model_retrain_trigger` (future hook).</li>
+                </ul>
                 <p className="text-sm"><strong>Dependencies:</strong> Consumes `conversation_reply` and `knowledge_updated`.</p>
-                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit‑tested.</p>
+                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit-tested.</p>
                 <p className="text-sm"><strong>Verification:</strong> Integration test simulates conversation flow; validates logging and metric updates.</p>
-                <p className="text-sm"><strong>Knowledge Produced:</strong> Outcome‑to‑signal mapping, optimal follow‑up timing, objection handling.</p>
-                <p className="text-sm"><strong>Failure Modes:</strong> Log write error → fallback to in‑mem buffer with alert.</p>
-                <p className="text-sm"><strong>Protected Invariants:</strong> Logs are append‑only; each outcome entry references a unique prospect/conversation ID; no PII stored unless consented.</p>
+                <p className="text-sm"><strong>Knowledge Produced:</strong> Outcome-to-signal mapping, optimal follow-up timing, objection handling.</p>
+                <p className="text-sm"><strong>Failure Modes:</strong> Log write error → fallback to in-mem buffer with alert.</p>
+                <p className="text-sm"><strong>Protected Invariants:</strong> Logs are append-only; each outcome entry references a unique prospect/conversation ID; no PII stored unless consented.</p>
                 <Button variant="outline" size="sm" onClick={() => alert('Showing latest feedback entry…')}>
                   Latest Feedback
                 </Button>
@@ -297,19 +292,19 @@ const HarnessEngineeringPage: NextPage = () => {
                 </p>
                 <Separator />
                 <p className="text-sm"><strong>Inputs:</strong> All upstream events (signal_detected, prospect_scouted, outreach_generated, conversation_reply, etc.).</p>
-                <p className="text-sm"><strong>Outputs:</strong> Event `governance_audit` with schema: {auditId, eventType, details, timestamp, policyViolations[]}.</p>
+                <p className="text-sm"><strong>Outputs:</strong> Event `governance_audit` with schema: &#123;auditId, eventType, details, timestamp, policyViolations[]&#125;.</p>
                 <p className="text-sm"><strong>Responsibilities:</strong></p>
                 <ul className="list-disc list-inset space-y-1 text-xs pl-4">
                   <li>Scan all incoming data for PII (email, phone, SSN) using regex/NER.</li>
                   <li>Check consent flags against prospect record.</li>
-                  <li>Validate message content against allowed templates and language.</p>
-                  <li>If violation → enrich event with `policyViolations` and optionally block downstream transmission.</p>
-                  <li>Publish audit event regardless (even if clean).</p>
-                </p>
+                  <li>Validate message content against allowed templates and language.</li>
+                  <li>If violation → enrich event with `policyViolations` and optionally block downstream transmission.</li>
+                  <li>Publish audit event regardless (even if clean).</li>
+                </ul>
                 <p className="text-sm"><strong>Dependencies:</strong> Consumes every upstream event; emits `governance_audit`.</p>
-                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit‑tested.</p>
-                <p className="text-sm"><strong>Verification:</strong> Property‑based test for PII detection; integration test ensures no prohibited data leaks.</p>
-                <p className="text-sm"><strong>Knowledge Produced:</strong> Policy violation trends, false‑positive/negative rates of scanners.</p>
+                <p className="text-sm"><strong>Current Status:</strong> Implemented & unit-tested.</p>
+                <p className="text-sm"><strong>Verification:</strong> Property-based test for PII detection; integration test ensures no prohibited data leaks.</p>
+                <p className="text-sm"><strong>Knowledge Produced:</strong> Policy violation trends, false-positive/negative rates of scanners.</p>
                 <p className="text-sm"><strong>Failure Modes:</strong> Scanner crash → fallback to permissive mode + alert.</p>
                 <p className="text-sm"><strong>Protected Invariants:</strong> No outbound message leaves the system without a successful governance audit; audit ID is monotonic.</p>
                 <Button variant="outline" size="sm" onClick={() => alert('Showing recent governance audit…')}>

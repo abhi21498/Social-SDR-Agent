@@ -1,16 +1,16 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { Button, Card, CardHeader, CardContent, Separator, Badge, Toaster } from '@/components/ui';
-import { Activity, Shield, Users, Code, Server, Lightbulb, Rocket, Zap, TrendingUp, BookOpen } from 'lucide-react';
-import DemoModeButton from '@/components/demo-mode-button';
+import { Activity, Shield, Users, Code, Server, Lightbulb, Rocket, Zap, TrendingUp, BookOpen, CheckCircle } from 'lucide-react';
+import { DemoModeButton } from '@/components/demo-mode-button';
 import clsx from 'clsx';
 
 const Landing: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Social SDR Agent – AI‑Powered Sales Development</title>
-        <meta name="description" content="Enterprise‑grade AI SDR platform built with the Harness Engineering Methodology." />
+        <title>Social SDR Agent – AI-Powered Sales Development</title>
+        <meta name="description" content="Enterprise-grade AI SDR platform built with the Harness Engineering Methodology." />
       </Head>
 
       <Toaster />
@@ -19,7 +19,7 @@ const Landing: NextPage = () => {
         <section className="mb-12 text-center">
           <h1 className="text-4xl font-bold mb-4">Social SDR Agent</h1>
           <p className="text-xl text-muted-foreground mb-6">
-            Autonomous AI‑driven Sales Development Representative that turns signals into meetings – guaranteed.
+            Autonomous AI-driven Sales Development Representative that turns signals into meetings – guaranteed.
           </p>
           <Button
             variant="default"
@@ -36,7 +36,7 @@ const Landing: NextPage = () => {
         <section className="mb-10">
           <h2 className="text-2xl font-bold mb-4">Executive Summary</h2>
           <p className="text-lg">
-            The Social SDR Agent automates the entire outbound sales development lifecycle – from signal detection to meeting booking – while enforcing human‑in‑the‑loop governance, full traceability, and continuous learning. Built on the Harness Engineering Methodology, it delivers a measurable increase in SDR productivity and pipeline predictability.
+            The Social SDR Agent automates the entire outbound sales development lifecycle – from signal detection to meeting booking – while enforcing human-in-the-loop governance, full traceability, and continuous learning. Built on the Harness Engineering Methodology, it delivers a measurable increase in SDR productivity and pipeline predictability.
           </p>
         </section>
 
@@ -44,7 +44,7 @@ const Landing: NextPage = () => {
         <section className="mb-10">
           <h2 className="text-2xl font-bold mb-4">Business Problem</h2>
           <p className="text-lg">
-            SDRs spend >60 % of their time on manual, low‑value tasks (signal monitoring, prospect research, drafting outreach, logging outcomes). This leads to inconsistent messaging, missed opportunities, and difficulty scaling while staying compliant.
+            SDRs spend &gt;60 % of their time on manual, low-value tasks (signal monitoring, prospect research, drafting outreach, logging outcomes). This leads to inconsistent messaging, missed opportunities, and difficulty scaling while staying compliant.
           </p>
         </section>
 
@@ -52,7 +52,7 @@ const Landing: NextPage = () => {
         <section className="mb-10">
           <h2 className="text-2xl font-bold mb-4">Solution Overview</h2>
           <p className="text-lg">
-            An AI‑powered microservice architecture that ingests public signals, scores and enriches prospects, generates personalized outreach, forces human approval, manages conversations, captures outcomes, and feeds learning back into the model – all governed by a transparent, auditable kernel.
+            An AI-powered microservice architecture that ingests public signals, scores and enriches prospects, generates personalized outreach, forces human approval, manages conversations, captures outcomes, and feeds learning back into the model – all governed by a transparent, auditable kernel.
           </p>
         </section>
 
@@ -65,16 +65,16 @@ const Landing: NextPage = () => {
               <p className="text-sm">Intent, Assumptions, Evidence, Reasoning, Decision Maker, Knowledge Updater, Registry.</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-              <h3 className="font-semibold mb-2">Eight Loosely‑Coupled Harnesses</h3>
+              <h3 className="font-semibold mb-2">Eight Loosely-Coupled Harnesses</h3>
               <p className="text-sm">Signal → Prospect → Research → Outreach → Review → Conversation → Feedback/Learning → Governance.</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
-              <h3 className="font-semibold mb-2">Event‑Bus & Immutable Logs</h3>
+              <h3 className="font-semibold mb-2">Event-Bus & Immutable Logs</h3>
               <p className="text-sm">All harnesses publish domain events; Knowledge & Evidence logs provide immutable audit trails.</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
               <h3 className="font-semibold mb-2">REST API + Demo Mode</h3>
-              <p className="text-sm">Thin HTTP façade (`/status`, `/signals/poll`, …) plus a one‑click deterministic demo that walks the full pipeline.</p>
+              <p className="text-sm">Thin HTTP façade (`/status`, `/signals/poll`, …) plus a one-click deterministic demo that walks the full pipeline.</p>
             </div>
           </div>
         </section>
@@ -104,11 +104,11 @@ const Landing: NextPage = () => {
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
               <h3 className="font-semibold">Evidence Log</h3>
-              <p className="text-sm">Append‑only store of all observations supporting decisions.</p>
+              <p className="text-sm">Append-only store of all observations supporting decisions.</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
               <h3 className="font-semibold">Reasoning Engine</h3>
-              <p className="text-sm">Logic‑based inference that ties evidence to decisions.</p>
+              <p className="text-sm">Logic-based inference that ties evidence to decisions.</p>
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
               <h3 className="font-semibold">Decision Maker</h3>
@@ -120,7 +120,7 @@ const Landing: NextPage = () => {
             </div>
             <div className="bg-white dark:bg-gray-800 rounded-lg p-4">
               <h3 className="font-semibold">Registry</h3>
-              <p className="text-sm">Dependency‑injection container for kernel services.</p>
+              <p className="text-sm">Dependency-injection container for kernel services.</p>
             </div>
           </div>
         </section>
@@ -159,17 +159,17 @@ const Landing: NextPage = () => {
             <span className="bg-primary/10 text-primary px-3 py-1 rounded">Tailwind CSS</span>
             <span className="bg-primary/10 text-primary px-3 py-1 rounded">shadcn/ui</span>
             <span className="bg-primary/10 text-primary px-3 py-1 rounded">Lucide Icons</span>
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded">Event‑Bus (in‑process)</span>
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded">JSON‑Lines Knowledge/Evidence Logs</span>
-            <span className="bg-primary/10 text-primary px-3 py-1 rounded">Docker‑ready</span>
+            <span className="bg-primary/10 text-primary px-3 py-1 rounded">Event-Bus (in-process)</span>
+            <span className="bg-primary/10 text-primary px-3 py-1 rounded">JSON-Lines Knowledge/Evidence Logs</span>
+            <span className="bg-primary/10 text-primary px-3 py-1 rounded">Docker-ready</span>
           </div>
         </section>
 
         {/* Demo Workflow */}
         <section className="mb-10">
-          <h2 className="text-2xl font-bold mb-4">Demo Workflow (one‑click)</h2>
+          <h2 className="text-2xl font-bold mb-4">Demo Workflow (one-click)</h2>
           <ol className="list-decimal list-inset space-y-2 text-lg">
-            <li>Signal detected (LinkedIn‑style post)</li>
+            <li>Signal detected (LinkedIn-style post)</li>
             <li>Prospect qualified (ICP score)</li>
             <li>Research completed (enrichment data)</li>
             <li>AI reasoning (outreach generation)</li>
@@ -180,7 +180,7 @@ const Landing: NextPage = () => {
             <li>Analytics refreshed (KPIs update)</li>
           </ol>
           <p className="text-sm text-muted-foreground mt-2">
-            Total runtime ≈ 60‑90 seconds, fully deterministic, no external APIs required.
+            Total runtime ≈ 60-90 seconds, fully deterministic, no external APIs required.
           </p>
         </section>
 
@@ -188,12 +188,12 @@ const Landing: NextPage = () => {
         <section className="mb-10">
           <h2 className="text-2xl font-bold mb-4">Current Prototype Scope</h2>
           <ul className="list-disc list-inset space-y-1 text-lg">
-            <li>End‑to‑end pipeline with synthetic data.</li>
-            <li>All eight harnesses implemented and unit‑tested.</li>
+            <li>End-to-end pipeline with synthetic data.</li>
+            <li>All eight harnesses implemented and unit-tested.</li>
             <li>Engineering Kernel (Intent, Assumptions, Evidence, Reasoning, Decision, Knowledge Updater, Registry).</li>
             <li>REST API exposing every harness (see API_REFERENCE.md).</li>
             <li>Full ADR suite, engineering lifecycle documents, and test suite.</li>
-            <li>Deploy‑ready Dockerfile, Procfile, Railway config, health endpoint.</li>
+            <li>Deploy-ready Dockerfile, Procfile, Railway config, health endpoint.</li>
           </ul>
         </section>
 
@@ -201,13 +201,13 @@ const Landing: NextPage = () => {
         <section className="mb-10">
           <h2 className="text-2xl font-bold mb-4">Future Roadmap</h2>
           <ol className="list-decimal list-inset space-y-2 text-lg">
-            <li>Plug‑in real data sources (LinkedIn Sales Navigator, Crunchbase, GDELT).</li>
-            <li>Swap the in‑process event bus for a durable broker (Redis/Kafka).</li>
-            <li>Add model‑retraining pipeline with feedback loops.</li>
-            <li>Introduce role‑based RBAC and SSO.</li>
-            <li>Export to Kubernetes‑native Helm chart.</li>
+            <li>Plug-in real data sources (LinkedIn Sales Navigator, Crunchbase, GDELT).</li>
+            <li>Swap the in-process event bus for a durable broker (Redis/Kafka).</li>
+            <li>Add model-retraining pipeline with feedback loops.</li>
+            <li>Introduce role-based RBAC and SSO.</li>
+            <li>Export to Kubernetes-native Helm chart.</li>
             <li>Add multilingual outreach templates.</li>
-            <li>Build a dedicated Streamlit front‑end for business users.</li>
+            <li>Build a dedicated Streamlit front-end for business users.</li>
           </ol>
         </section>
 

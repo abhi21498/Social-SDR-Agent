@@ -41,3 +41,15 @@ class EventBus {
 }
 
 export const eventBus = new EventBus();
+
+// Define event types for the pipeline
+export const PipelineEventType = {
+  SignalAdded: 'SignalAdded',
+  ProspectScored: 'ProspectScored',
+  ResearchCompleted: 'ResearchCompleted',
+  OutreachGenerated: 'OutreachGenerated',
+  OutreachApproved: 'OutreachApproved',
+  ConversationStarted: 'ConversationStarted',
+  KnowledgeUpdated: 'KnowledgeUpdated',
+  AnalyticsUpdated: 'AnalyticsUpdated',
+} as const;
