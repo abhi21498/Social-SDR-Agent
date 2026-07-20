@@ -21,15 +21,7 @@ const Landing: NextPage = () => {
           <p className="text-xl text-muted-foreground mb-6">
             Autonomous AI-driven Sales Development Representative that turns signals into meetings – guaranteed.
           </p>
-          <Button
-            variant="default"
-            onClick={() => {
-              (window as any).startDemoAndRedirect?.();
-            }}
-            className="mx-auto"
-          >
-            <Activity className="mr-2 h-4 w-4" /> Launch Demo
-          </Button>
+          <DemoModeButton />
         </section>
 
         {/* Executive Summary */}
