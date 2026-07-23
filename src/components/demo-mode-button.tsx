@@ -16,16 +16,14 @@ const DEMO_STEPS = [
       relevanceScore: 0.85,
       sentiment: 'positive',
       tags: ['funding', 'technology', 'growth'],
-    })
-  },
+    }) },
   { label: 'Prospect enriched', icon: <Activity className="mr-2 h-4 w-4" />, delay: 5000,
     emit: PipelineEventType.ProspectScored,
     payload: () => ({
       prospectId: Date.now() - 5000,
       score: 85,
       stage: 'RESEARCH_COMPLETE',
-    })
-  },
+    }) },
   { label: 'Research complete', icon: <Activity className="mr-2 h-4 w-4" />, delay: 5000,
     emit: PipelineEventType.ResearchCompleted,
     payload: () => ({
@@ -36,8 +34,7 @@ const DEMO_STEPS = [
         recentNews: 'Launched AI platform 2026-07-01',
         newsSentiment: 'positive',
       },
-    })
-  },
+    }) },
   { label: 'Message generated', icon: <Activity className="mr-2 h-4 w-4" />, delay: 5000,
     emit: PipelineEventType.OutreachGenerated,
     payload: () => ({
@@ -47,18 +44,16 @@ const DEMO_STEPS = [
       body: `Hi {{firstName}},\n\nCongrats on the funding! I’d love to discuss how we can help you scale further.\n\nBest,\n[Your Name]`,
       channel: 'EMAIL',
       variant: 'A',
-    })
-  },
+    }) },
   { label: 'Approved', icon: <Activity className="mr-2 h-4 w-4" />, delay: 5000,
     emit: PipelineEventType.OutreachApproved,
     payload: () => ({
       draftId: Date.now() - 20000,
       comment: 'Looks good – approved',
-    })
-  },
+    }) },
   { label: 'Sent', icon: <Activity className="mr-2 h-4 w-4" />, delay: 5000,
     emit: null,
-    payload: () => ({})
+    payload: () => ({}),
   },
   { label: 'Prospect replied', icon: <Activity className="mr-2 h-4 w-4" />, delay: 5000,
     emit: PipelineEventType.ConversationStarted,
@@ -71,8 +66,7 @@ const DEMO_STEPS = [
         { id:2, direction:'INBOUND', timestamp:new Date(Date.now()-20000).toISOString(),
           content:'Thanks for reaching out! I’m interested in learning more.', channel:'EMAIL', sentiment:'positive' },
       ],
-    })
-  },
+    }) },
   { label: 'Knowledge updated', icon: <Activity className="mr-2 h-4 w-4" />, delay: 5000,
     emit: PipelineEventType.KnowledgeUpdated,
     payload: () => ({
@@ -81,11 +75,10 @@ const DEMO_STEPS = [
       type: 'NOTE',
       tags: ['lesson', 'linkedin'],
       contentSummary: 'Captured key insight from the signal for future reference.',
-    })
-  },
+    }) },
   { label: 'Dashboard refreshed', icon: <Activity className="mr-2 h-4 w-4" />, delay: 5000,
     emit: PipelineEventType.AnalyticsUpdated,
-    payload: () => ({})
+    payload: () => ({}),
   },
 ];
 
@@ -100,6 +93,28 @@ export const DemoModeButton: React.FC = () => {
     setStatus(DEMO_STEPS.map(()=>'pending'));
     (window as any).demoStartTime = Date.now();
 
+    // 1️⃣ Call the backend to start a real poll
+    try {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      if (!apiUrl) {
+        console.warn('NEXT_PUBLIC_API_URL not set; skipping backend call');
+      } else {
+        const resp = await fetch(`${apiUrl}/trigger/poll`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+        });
+        if (!resp.ok) {
+          throw new Error(`Backend responded ${resp.status}: ${await resp.text()}`);
+        }
+        const data = await resp.json();
+        console.log('Backend poll triggered:', data);
+      }
+    } catch (e) {
+      console.error('Failed to trigger backend poll:', e);
+      // Continue with demo UI even if backend call fails
+    }
+
+    // 2️⃣ Run the client‑side simulation for UI feedback
     for (let i = 0; i < DEMO_STEPS.length; i++) {
       await new Promise(res => setTimeout(res, DEMO_STEPS[i].delay));
       setStep(i);
@@ -113,8 +128,8 @@ export const DemoModeButton: React.FC = () => {
       if (emitType) {
         try {
           eventBus.publish(emitType, DEMO_STEPS[i].payload());
-        } catch (e) {
-          console.error(`Demo step ${DEMO_STEPS[i].label} failed`, e);
+        } catch (err) {
+          console.error(`Demo step ${DEMO_STEPS[i].label} failed`, err);
           setStatus(prev => {
             const copy = [...prev];
             copy[i] = 'error';
@@ -131,7 +146,7 @@ export const DemoModeButton: React.FC = () => {
       });
     }
 
-    // Demo finished – redirect to dashboard after a brief pause
+    // Demo finished – redirect to home after a short pause
     await new Promise(res => setTimeout(res, 800));
     window.location.href = '/';
     setRunning(false);
@@ -167,14 +182,12 @@ export const DemoModeButton: React.FC = () => {
                 {status[i]==='success' && <span className="ml-2 text-xs text-green-600">✔️ Completed</span>}
                 {status[i]==='error' && <span className="ml-2 text-xs text-red-600">❌ Failed</span>}
               </div>
-              <div className="w-full h-1 mt-1 bg-gray-200 dark:bg-gray-700 rounded overflow-hidden">
-                <div className={`
-                  h-full transition-all duration-500
+              <div className={`w-full h-1 mt-1 bg-gray-200 dark:bg-gray-700 rounded overflow-hidden`}>
+                <div className={`h-full transition-all duration-500
                   ${status[i]==='pending'?'w-0':''}
                   ${status[i]==='running'?'w-1/3':''}
                   ${status[i]==='success'?'w-full':''}
-                  ${status[i]==='error'?'w-full bg-red-500':''}
-                `}></div>
+                  ${status[i]==='error'?'w-full bg-red-500':''}`}></div>
               </div>
             </div>
             {(status[i] === 'success' || status[i] === 'running') && s.payload && (

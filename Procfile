@@ -1,1 +1,1 @@
-web: python -m TMS_Prototype.run_server
+web: uvicorn src.api.fastapi_server:app --host 0.0.0.0 --port $PORT
