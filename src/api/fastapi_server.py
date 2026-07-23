@@ -41,6 +41,14 @@ def status():
         "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
+@app.get("/healthz")
+def healthz():
+    return {
+        "status": "ok",
+        "service": "Social SDR Agent",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+    }
+
 @app.post("/trigger/poll")
 def trigger_poll():
     """Trigger a single poll of the signal monitor.
