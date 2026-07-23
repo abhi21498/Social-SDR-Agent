@@ -24,7 +24,10 @@ app = FastAPI(
 # In production, restrict this to your actual domain.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],          # <-- change to your Vercel URL for tighter security
+    allow_origins=[
+        "https://social-sdr-agent-bu4e.vercel.app",
+        # For local development, you can also keep "*" or add http://localhost:3000
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
