@@ -22,62 +22,7 @@ The system is organized around an **event bus** (in‑process for the prototype)
 
 The following diagram illustrates the core harnesses and their interactions via the event bus:
 
-```mermaid
-flowchart TD
-    %% Core components
-    subgraph Kernel[Kernel]
-        Intent[Intent Store]
-        Assumptions[Assumptions Store]
-        Evidence[Evidence Store]
-        Reasoning[Reasoning Log]
-        Decisions[Decision Log]
-        ServiceReg[Service Registry]
-    end
-
-    subgraph EventBus[Event Bus (In‑Process)]
-        direction TB
-        SignalEvent[Signal Event]
-        ProspectEvent[Prospect Event]
-        ResearchEvent[Research Event]
-        OutreachEvent[Outreach Event]
-        ReviewEvent[Review Event]
-        ConvEvent[Conversation Event]
-        FeedbackEvent[Feedback Event]
-        GovEvent[Governance Event]
-    end
-
-    %% Harnesses
-    subgraph Harnesses[Harnesses]
-        SM[Signal Monitoring] -->|Emits| SignalEvent
-        PI[Prospect Identification] -->|Consumes| SignalEvent
-        PI -->|Emits| ProspectEvent
-        R[Research] -->|Consumes| ProspectEvent
-        R -->|Emits| ResearchEvent
-        OG[Outreach Generation] -->|Consumes| ResearchEvent
-        OG -->|Emits| OutreachEvent
-        HR[Human Review] -->|Consumes| OutreachEvent
-        HR -->|Emits| ReviewEvent
-        CM[Conversation Management] -->|Consumes| ReviewEvent
-        CM -->|Emits| ConvEvent
-        FL[Feedback & Learning] -->|Consumes| ConvEvent
-        FL -->|Emits| FeedbackEvent
-        Gov[Governance] -->|Consumes| SignalEvent
-        Gov -->|Consumes| ProspectEvent
-        Gov -->|Consumes| ResearchEvent
-        Gov -->|Consumes| OutreachEvent
-        Gov -->|Consumes| ReviewEvent
-        Gov -->|Consumes| ConvEvent
-        Gov -->|Emits| GovEvent
-    end
-
-    %% Kernel interactions
-    Kernel -->|Reads/Writes| EventBus
-    EventBus -->|Triggers| Kernel
-
-    style Kernel fill:#f9f,stroke:#333,stroke-width:2px
-    style EventBus fill:#bbf,stroke:#333,stroke-width:2px
-    style Harnesses fill:#efe,stroke:#333,stroke-width:2px
-```
+![Architecture Diagram](./assets/architecture-diagram.png)
 
 ### Screenshot of the Demo Frontend
 ![Demo Frontend](./assets/demo-frontend.png)
