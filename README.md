@@ -2,6 +2,9 @@
 
 An AI‑powered Sales Development Representative prototype built with the **Harness Engineering Methodology**. It turns public signals into qualified prospects, generates personalized outreach, enforces human‑in‑the‑loop review, and continuously learns from outcomes—all while being fully traceable, testable, and governance‑ready.
 
+## Live Demo
+You can see a live deployed version of the frontend at: https://social-sdr-agent-bu4e.vercel.app/
+
 ## What It Does (High‑Level Flow)
 
 1. **Signal Monitoring** – scrapes news, social feeds, intent data.  
@@ -15,6 +18,72 @@ An AI‑powered Sales Development Representative prototype built with the **Harn
 
 The system is organized around an **event bus** (in‑process for the prototype) and a **kernel** that stores intent, assumptions, evidence, reasoning, decisions, and a service registry.
 
+## Harness Architecture & Visual Overview
+
+The following diagram illustrates the core harnesses and their interactions via the event bus:
+
+```mermaid
+flowchart TD
+    %% Core components
+    subgraph Kernel[Kernel]
+        Intent[Intent Store]
+        Assumptions[Assumptions Store]
+        Evidence[Evidence Store]
+        Reasoning[Reasoning Log]
+        Decisions[Decision Log]
+        ServiceReg[Service Registry]
+    end
+
+    subgraph EventBus[Event Bus (In‑Process)]
+        direction TB
+        SignalEvent[Signal Event]
+        ProspectEvent[Prospect Event]
+        ResearchEvent[Research Event]
+        OutreachEvent[Outreach Event]
+        ReviewEvent[Review Event]
+        ConvEvent[Conversation Event]
+        FeedbackEvent[Feedback Event]
+        GovEvent[Governance Event]
+    end
+
+    %% Harnesses
+    subgraph Harnesses[Harnesses]
+        SM[Signal Monitoring] -->|Emits| SignalEvent
+        PI[Prospect Identification] -->|Consumes| SignalEvent
+        PI -->|Emits| ProspectEvent
+        R[Research] -->|Consumes| ProspectEvent
+        R -->|Emits| ResearchEvent
+        OG[Outreach Generation] -->|Consumes| ResearchEvent
+        OG -->|Emits| OutreachEvent
+        HR[Human Review] -->|Consumes| OutreachEvent
+        HR -->|Emits| ReviewEvent
+        CM[Conversation Management] -->|Consumes| ReviewEvent
+        CM -->|Emits| ConvEvent
+        FL[Feedback & Learning] -->|Consumes| ConvEvent
+        FL -->|Emits| FeedbackEvent
+        Gov[Governance] -->|Consumes| SignalEvent
+        Gov -->|Consumes| ProspectEvent
+        Gov -->|Consumes| ResearchEvent
+        Gov -->|Consumes| OutreachEvent
+        Gov -->|Consumes| ReviewEvent
+        Gov -->|Consumes| ConvEvent
+        Gov -->|Emits| GovEvent
+    end
+
+    %% Kernel interactions
+    Kernel -->|Reads/Writes| EventBus
+    EventBus -->|Triggers| Kernel
+
+    style Kernel fill:#f9f,stroke:#333,stroke-width:2px
+    style EventBus fill:#bbf,stroke:#333,stroke-width:2px
+    style Harnesses fill:#efe,stroke:#333,stroke-width:2px
+```
+
+### Screenshot of the Demo Frontend
+![Demo Frontend](./assets/demo-frontend.png)
+
+*The screenshot above shows the demo landing page where users can launch the full end‑to‑end flow with a single click.*
+
 ## Demo Mode (Zero‑Setup)
 
 A one‑click **Demo Mode** walks the full pipeline with synthetic data, so you can see the entire flow without configuring any external APIs.
@@ -22,14 +91,12 @@ A one‑click **Demo Mode** walks the full pipeline with synthetic data, so you 
 ### How to Run the Demo Locally
 
 1. **Clone the repo**
-
    ```bash
    git clone https://github.com/abhi21498/Social-SDR-Agent.git
    cd Social-SDR-Agent
    ```
 
 2. **Backend (Python 3.11+)**
-
    ```bash
    # Optional: create a virtual environment
    python -m venv .venv
@@ -41,11 +108,9 @@ A one‑click **Demo Mode** walks the full pipeline with synthetic data, so you 
    # Start the API server (respects $PORT, defaults to 8000)
    python -m TMS_Prototype.run_server
    ```
-
    The server will start and expose a health endpoint at `http://localhost:8000/healthz`.
 
 3. **Frontend (Node ≥ 18, npm or yarn)**
-
    ```bash
    # From the repo root
    npm install          # or yarn install
@@ -53,19 +118,17 @@ A one‑click **Demo Mode** walks the full pipeline with synthetic data, so you 
    ```
 
 4. **Launch the Demo**
-
    - Open `http://localhost:3000` in your browser.
    - Click the **“Launch Demo”** button on the landing page.
    - The demo will automatically progress through the eight harnesses, showing status updates, and finally redirect to a dashboard view.
 
 5. **Explore the UI**
-
-   - **Landing page (`/`)** – executive summary, architecture highlights, and demo launcher.
+   - **Landing page (`/`)** – executive summary, architecture highlights, demo launcher.
    - **Harness Engineering (`/harness-engineering`)** – detailed cards for each harness with purpose, inputs/outputs, responsibilities, and current status.
-   - **Engineering Dashboard (`/engineering-dashboard`)** – placeholder for metrics, test coverage, and knowledge growth.
+   - **Engineering Dashboard (`/engineering-dashboard`)** – placeholder for metrics, test coverage, knowledge growth.
    - **Architecture (`/architecture`)** – placeholder for diagrams and component interactions.
-   - **Operations (`/operations`)** – placeholder for logs, health, and observability.
-   - **Explainability Modal** – accessible from any harness card to see the evidence, assumptions, confidence, and applied policies behind an AI decision.
+   - **Operations (`/operations`)** – placeholder for logs, health, observability.
+   - **Explainability Modal** – accessible from any harness card to view the evidence, assumptions, confidence, and applied policies behind an AI decision.
 
 ## Project Structure (Key Folders)
 
@@ -80,21 +143,18 @@ A one‑click **Demo Mode** walks the full pipeline with synthetic data, so you 
 ## Verification & Testing
 
 - Backend unit tests live under `TMS_Prototype/tests/`. Run them with:
-
   ```bash
   cd TMS_Prototype
   pytest -q
   ```
-
 - The frontend uses TypeScript and Next.js; linting can be added later.
 
 ## Deployment Ready
 
 The repository includes:
-
 - `Dockerfile` (multi‑stage, copies source, respects `$PORT`).
 - `Procfile` (for Heroku/Railway‑style platforms).
-- `railway.json` (healthcheck `/healthz`).
+- `railway.json` (healthcheck `/status` – note: the healthcheck points to `/status` which maps to the `/status` endpoint; adjust if needed).
 - `runtime.txt` (pins Python 3.11.15).
 - `.dockerignore` (keeps build context lean).
 
@@ -115,4 +175,5 @@ MIT – see the `LICENSE` file in `TMS_Prototype/`.
 ---
 
 *Built with the Harness Engineering Methodology to ensure every decision is traceable, every component is tested, and knowledge is captured continuously.*
+
 # Rebuild trigger 1784837877
